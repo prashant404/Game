@@ -10,6 +10,7 @@
     background-color: #000;
     color: #fff;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    cursor: url('../assets/mouse-cursor.png'), auto;
   }
   
 
