@@ -1,9 +1,9 @@
 @font-face {
     font-family: 'Anurati';
     src: url('../fonts/Anurati-Regular.otf') format('opentype');
-  }
-  
-  body, html {
+}
+
+body, html {
     margin: 0;
     padding: 0;
     scroll-behavior: smooth;
@@ -11,39 +11,38 @@
     color: #fff;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     cursor: url('../assets/mouse-cursor.png'), auto;
-  }
-  
+}
 
-  .hero-section {
+.hero-section {
     height: 100vh;
     background: url('../assets/images/back.jpg') no-repeat center center/cover;
     position: relative;
     overflow: hidden;
-  }
-  
-  .hero-overlay {
+}
+
+.hero-overlay {
     position: absolute;
     inset: 0;
     background: rgba(0, 0, 0, 0.6);
     z-index: 1;
-  }
-  
-  .hero-content {
+}
+
+.hero-content {
     position: relative;
     z-index: 2;
     animation: fadeInUp 1.5s ease-out;
-  }
-  
-  .hero-title {
+}
+
+.hero-title {
     font-family: 'Anurati', sans-serif;
     font-size: 5rem;
     color: #fff;
     letter-spacing: 5px;
     text-shadow: 0 0 10px #fff;
     margin-bottom: 20px;
-  }
-  
-  .scroll-down {
+}
+
+.scroll-down {
     font-size: 3rem;
     color: #fff;
     margin-top: 20px;
@@ -52,71 +51,142 @@
     text-shadow: 0 0 8px #0ff;
     cursor: pointer;
     transition: transform 0.3s ease;
-  }
-  
-  .scroll-down:hover {
+}
+
+.scroll-down:hover {
     transform: scale(1.2);
-  }
-  
-  @keyframes bounce {
+}
+
+@keyframes bounce {
     0%, 100% {
-      transform: translateY(0);
+        transform: translateY(0);
     }
     50% {
-      transform: translateY(10px);
+        transform: translateY(10px);
     }
-  }
-  
-  /* Games Section */
-  .section-title {
+}
+
+.section-title {
     font-size: 2rem;
     font-weight: bold;
     text-shadow: 0 0 5px #fff;
     animation: fadeInUp 1.2s ease-out;
-  }
-  
-  .fade-in {
+}
+
+.fade-in {
     animation: fadeInUp 1.2s ease-out;
-  }
-  
-  .game-card {
-    background-color: #111;
-    border: 1px solid #444;
-    color: #fff;
-    border-radius: 12px;
+}
+
+
+.game-card {
+    position: relative;
+    overflow: hidden;
+    border: none;
+    border-radius: 15px;
+    height: 420px;
+    width: 100%;         
+    max-width: 320px;      
+    display: flex;
+    align-items: flex-end;
+    margin: 15px auto;     
+    background-color: #000;
+    box-shadow:
+      0 0 8px 2px rgba(0, 255, 0, 0.4),
+      0 4px 8px rgba(0, 0, 0, 0.6);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    padding: 10px;
-  }
-  
-  .game-card:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 15px #fff;
-  }
-  
-  .btn-outline-light {
+}
+
+.game-card:hover {
+    transform: translateY(-8px);
+    box-shadow:
+      0 0 20px 6px rgba(0, 255, 0, 0.8),
+      0 15px 30px rgba(0, 255, 255, 0.7);
+}
+
+.game-card-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-size: cover;
+    background-position: center;
+    filter: brightness(0.4);
+    z-index: 1;
+    transition: filter 0.3s ease;
+}
+
+.game-card:hover .game-card-bg {
+    filter: brightness(0.6);
+}
+
+.game-card-overlay {
+    position: relative;
+    z-index: 2;
+    padding: 20px;
+    width: 100%;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.85), transparent);
+    text-align: center;
+    border-radius: 15px;
+    color: #fff;
+}
+
+.btn-outline-light {
     border-color: #fff;
     color: #fff;
-  }
-  
-  .btn-outline-light:hover {
+}
+
+.btn-outline-light:hover {
     background-color: #fff;
     color: #000;
-  }
-  
-  /* Footer */
-  .footer-section {
+}
+
+/* Footer */
+.footer-section {
     background-color: #111;
     border-top: 1px solid #444;
     font-size: 0.9rem;
     color: #aaa;
-  }
-  
+}
 
-  .lottie-wrapper {
+.lottie-wrapper {
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 300px;
     animation: fadeInUp 1s ease;
-  }
-  
+}
+
+.row {
+    justify-content: center;
+    gap: 15px;
+}
+
+@media (max-width: 768px) {
+    .game-card {
+        height: 350px;
+        margin: 15px auto;
+    }
+}
+
+@media (max-width: 350px) {
+    .game-card {
+        height: 300px;
+        max-width: 95vw;
+    }
+    .hero-title {
+        font-size: 3rem;
+    }
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translate3d(0, 20px, 0);
+    }
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}

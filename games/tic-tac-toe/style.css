@@ -1,0 +1,177 @@
+@font-face {
+    font-family: 'Anurati';
+    src: url('../assets/AgeraGothic-Regular-BF67bfa4d805979.otf') format('opentype');
+}
+
+body {
+
+    min-height: 100vh;
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    overflow-x: hidden;
+    box-sizing: border-box;
+    flex-direction: column;
+    cursor: url('../assets/mouse-cursor.png'), auto;
+}
+
+.gradient {
+  background-image: linear-gradient(
+    45deg,
+    hsl(240deg 3% 92%) 0%,
+    hsl(273deg 2% 82%) 6%,
+    hsl(313deg 2% 72%) 12%,
+    hsl(338deg 3% 62%) 18%,
+    hsl(354deg 3% 53%) 24%,
+    hsl(8deg 5% 43%) 29%,
+    hsl(19deg 8% 34%) 35%,
+    hsl(30deg 11% 25%) 41%,
+    hsl(44deg 14% 16%) 47%,
+    hsl(49deg 17% 13%) 53%,
+    hsl(41deg 17% 16%) 59%,
+    hsl(34deg 17% 20%) 65%,
+    hsl(28deg 17% 23%) 71%,
+    hsl(23deg 16% 27%) 76%,
+    hsl(18deg 16% 31%) 82%,
+    hsl(13deg 14% 35%) 88%,
+    hsl(7deg 13% 39%) 94%,
+    hsl(0deg 11% 43%) 100%
+  );
+}
+
+.title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #00eaff;
+    text-shadow: 0 0 10px rgba(0, 234, 255, 0.5);
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Lottie Animation */
+.lottie-player {
+    width: 180px;
+    height: 180px;
+    margin-bottom: -20px;
+}
+
+.container {
+    width: 100%;
+    max-width: 400px;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+/* Board styling */
+.board {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    padding: 10px;
+    aspect-ratio: 1 / 1;
+    width: 100%;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(6.5px);
+    -webkit-backdrop-filter: blur(6.5px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+/* Cells */
+.cell {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    font-size: clamp(1.5rem, 8vw, 2.5rem);
+    color: #00eaff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.cell:hover {
+    background: rgba(0, 234, 255, 0.2);
+    transform: scale(1.05);
+}
+
+.cell:active,
+.cell:focus {
+    background: rgba(0, 234, 255, 0.2);
+    transform: scale(1.05);
+    outline: none;
+}
+
+#status {
+    font-size: 1rem;
+    margin: 15px 0;
+    color: #ffffffcc;
+    text-align: center;
+}
+
+#reset {
+    width: 100%;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 30px;
+    background-color: #00eaff;
+    color: #121212;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+#reset:hover {
+    background-color: #00cfe6;
+    transform: scale(1.05);
+}
+
+.modal-content {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    color: #fff;
+    border-radius: 15px;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+}
+
+.modal-header {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.modal-body button {
+    font-size: 1.5rem;
+    padding: 10px 20px;
+    border-radius: 30px;
+}
+
+/* Result Text */
+#resultText {
+    font-weight: bold;
+    color: #00eaff;
+    text-align: center;
+    font-size: 1.2rem;
+}
+
+#playAgain {
+    padding: 10px 30px;
+    border-radius: 30px;
+    font-size: 1.2rem;
+}
+
+.mode-select {
+    margin-bottom: 1rem;
+    color: white;
+    font-weight: 600;
+}
+
+.mode-select input[type="radio"] {
+    cursor: pointer;
+}
