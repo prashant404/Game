@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Guess the Number</title>
     <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
     <div class="container">
         <h1>Guess the Number</h1>
@@ -14,13 +16,15 @@
         <div class="difficulty">
             <label for="difficultyDropdown">Difficulty:</label>
             <div class="custom-dropdown" id="difficultyDropdown" tabindex="0">
-                <div class="dropdown-trigger">Normal (1–150, 8 guesses)</div>
+                <div class="dropdown-trigger">Easy</div>
                 <ul class="dropdown-options">
-                    <li data-value="easy">Easy (1–100, 10 guesses)</li>
-                    <li data-value="normal">Normal (1–150, 8 guesses)</li>
-                    <li data-value="hard">Hard (1–200, 6 guesses, 30s timer)</li>
+                    <li data-value="easy">Easy</li>
+                    <li data-value="normal">Normal</li>
+                    <li data-value="hard">Hard</li>
                 </ul>
             </div>
+            <div class="mode-details" id="modeDetails">Range: 1–100, Guesses: 10</div>
+            <p class="remaining-guesses">Remaining Guesses: <span id="remaining">10</span></p>
         </div>
 
         <div class="input-group">
@@ -32,7 +36,6 @@
         <div class="message" id="message"></div>
 
         <div class="info">
-            <p>Remaining Guesses: <span id="remaining">8</span></p>
             <p id="timerDisplay" style="display: none;">Time Left: <span id="timeLeft">30</span>s</p>
             <p>High Score: <span id="highScore">0</span></p>
         </div>
@@ -42,8 +45,7 @@
     <!-- WIN POPUP -->
     <div id="winPopup" class="popup-overlay">
         <div class="backdrop"></div>
-        <dotlottie-player id="winAnim"
-            src="https://lottie.host/55080891-2bfa-4b57-a11d-5ffbc2c87ff8/pYk3oDkfoF.lottie"
+        <dotlottie-player id="winAnim" src="https://lottie.host/55080891-2bfa-4b57-a11d-5ffbc2c87ff8/pYk3oDkfoF.lottie"
             background="transparent" speed="1" style="width: 250px; height: 250px;" loop autoplay>
         </dotlottie-player>
     </div>
@@ -51,12 +53,13 @@
     <!-- LOSE POPUP -->
     <div id="losePopup" class="popup-overlay">
         <div class="backdrop"></div>
-        <dotlottie-player id="loseAnim"
-            src="https://lottie.host/6805b1f1-4a71-4188-afcd-97ee47baf14e/CulZv8IPo8.lottie"
-            background="transparent" speed="1" style="width: 250px; height: 250px;" loop autoplay>
-        </dotlottie-player>
+        <dotlottie-player src="https://lottie.host/9e9bc446-98e4-4321-b04d-32ff456def61/YdHrMTr9AA.lottie"
+            background="transparent" speed="1.5" style="width: 250px; height: 250px" loop autoplay></dotlottie-player>
     </div>
+
+
 
     <script src="script.js"></script>
 </body>
+
 </html>

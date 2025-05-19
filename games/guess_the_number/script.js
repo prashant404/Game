@@ -2,7 +2,7 @@ let secretNumber;
 let remainingGuesses;
 let highScore = { easy: 0, normal: 0, hard: 0 };
 let gameOver = false;
-let currentDifficulty = 'normal';
+let currentDifficulty = 'easy';
 let timerInterval = null;
 let timeLeft = 30;
 
@@ -18,6 +18,7 @@ const dropdownOptions = difficultyDropdown.querySelector(".dropdown-options");
 const container = document.querySelector(".container");
 const timerDisplay = document.getElementById("timerDisplay");
 const timeLeftDisplay = document.getElementById("timeLeft");
+const modeDetails = document.getElementById("modeDetails");
 
 const winPopup = document.getElementById("winPopup");
 const losePopup = document.getElementById("losePopup");
@@ -43,6 +44,7 @@ difficultyDropdown.addEventListener("click", (e) => {
     } else if (e.target.tagName === "LI") {
         currentDifficulty = e.target.getAttribute("data-value");
         dropdownTrigger.textContent = e.target.textContent;
+        updateModeDetails();
         initGame();
         closeDropdown();
     }
@@ -69,6 +71,16 @@ const difficultySettings = {
     normal: { maxNumber: 150, guesses: 8, timer: false },
     hard: { maxNumber: 200, guesses: 6, timer: true, timeLimit: 30 }
 };
+
+// Update mode details
+function updateModeDetails() {
+    const settings = difficultySettings[currentDifficulty];
+    let details = `Range: 1–${settings.maxNumber}, Guesses: ${settings.guesses}`;
+    if (settings.timer) {
+        details += `, Timer: ${settings.timeLimit}s`;
+    }
+    modeDetails.textContent = details;
+}
 
 // Timer functions
 function startTimer() {
@@ -120,6 +132,7 @@ function initGame() {
     showMessage(`Guess a number between 1 and ${difficultySettings[currentDifficulty].maxNumber}`, "#ffffff");
     enableInput();
     gameOver = false;
+    updateModeDetails();
     startTimer();
 }
 
@@ -206,10 +219,29 @@ checkBtn.addEventListener("click", () => {
         disableInput();
         showLoseAnimation();
         gameOver = true;
-    } else if (guess > secretNumber) {
-        showMessage("📉 Too high!", "#06b6d4");
     } else {
-        showMessage("📈 Too low!", "#06b6d4");
+        const maxNumber = difficultySettings[currentDifficulty].maxNumber;
+        const diff = Math.abs(guess - secretNumber);
+        const closeThreshold = maxNumber * 0.1; // 10% of maxNumber
+        const moderateThreshold = maxNumber * 0.25; // 25% of maxNumber
+
+        if (guess > secretNumber) {
+            if (diff <= closeThreshold) {
+                showMessage("📉 Just a tad too high!", "#06b6d4");
+            } else if (diff <= moderateThreshold) {
+                showMessage("📉 A bit too high!", "#06b6d4");
+            } else {
+                showMessage("📉 Way too high!", "#06b6d4");
+            }
+        } else {
+            if (diff <= closeThreshold) {
+                showMessage("📈 Just a tad too low!", "#06b6d4");
+            } else if (diff <= moderateThreshold) {
+                showMessage("📈 A bit too low!", "#06b6d4");
+            } else {
+                showMessage("📈 Way too low!", "#06b6d4");
+            }
+        }
     }
 });
 
