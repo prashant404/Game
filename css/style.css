@@ -3,7 +3,8 @@
     src: url('../fonts/Anurati-Regular.otf') format('opentype');
 }
 
-body, html {
+body,
+html {
     margin: 0;
     padding: 0;
     scroll-behavior: smooth;
@@ -58,9 +59,12 @@ body, html {
 }
 
 @keyframes bounce {
-    0%, 100% {
+
+    0%,
+    100% {
         transform: translateY(0);
     }
+
     50% {
         transform: translateY(10px);
     }
@@ -84,23 +88,23 @@ body, html {
     border: none;
     border-radius: 15px;
     height: 420px;
-    width: 100%;         
-    max-width: 320px;      
+    width: 100%;
+    max-width: 320px;
     display: flex;
     align-items: flex-end;
-    margin: 15px auto;     
+    margin: 15px auto;
     background-color: #000;
     box-shadow:
-      0 0 8px 2px rgba(0, 255, 0, 0.4),
-      0 4px 8px rgba(0, 0, 0, 0.6);
+        0 0 20px 6px rgba(83, 219, 235, 0.8),
+        0 4px 8px rgba(0, 0, 0, 0.6);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .game-card:hover {
     transform: translateY(-8px);
     box-shadow:
-      0 0 20px 6px rgba(0, 255, 0, 0.8),
-      0 15px 30px rgba(0, 255, 255, 0.7);
+        0 0 20px 6px rgba(83, 219, 235, 0.8),
+        0 15px 30px rgba(0, 255, 255, 0.7);
 }
 
 .game-card-bg {
@@ -174,6 +178,7 @@ body, html {
         height: 300px;
         max-width: 95vw;
     }
+
     .hero-title {
         font-size: 3rem;
     }
@@ -185,6 +190,7 @@ body, html {
         opacity: 0;
         transform: translate3d(0, 20px, 0);
     }
+
     to {
         opacity: 1;
         transform: none;

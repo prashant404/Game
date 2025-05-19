@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Guess the Number</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <div class="container">
+        <h1>Guess the Number</h1>
+        <p class="instructions">Choose a difficulty and guess the number!</p>
+
+        <div class="difficulty">
+            <label for="difficultyDropdown">Difficulty:</label>
+            <div class="custom-dropdown" id="difficultyDropdown" tabindex="0">
+                <div class="dropdown-trigger">Normal (1–150, 8 guesses)</div>
+                <ul class="dropdown-options">
+                    <li data-value="easy">Easy (1–100, 10 guesses)</li>
+                    <li data-value="normal">Normal (1–150, 8 guesses)</li>
+                    <li data-value="hard">Hard (1–200, 6 guesses, 30s timer)</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="input-group">
+            <input type="number" id="guessInput" placeholder="Enter your guess" />
+            <button id="checkBtn">Check</button>
+            <button id="resetBtn" disabled>Play Again</button>
+        </div>
+
+        <div class="message" id="message"></div>
+
+        <div class="info">
+            <p>Remaining Guesses: <span id="remaining">8</span></p>
+            <p id="timerDisplay" style="display: none;">Time Left: <span id="timeLeft">30</span>s</p>
+            <p>High Score: <span id="highScore">0</span></p>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs" type="module"></script>
+    <!-- WIN POPUP -->
+    <div id="winPopup" class="popup-overlay">
+        <div class="backdrop"></div>
+        <dotlottie-player id="winAnim"
+            src="https://lottie.host/55080891-2bfa-4b57-a11d-5ffbc2c87ff8/pYk3oDkfoF.lottie"
+            background="transparent" speed="1" style="width: 250px; height: 250px;" loop autoplay>
+        </dotlottie-player>
+    </div>
+
+    <!-- LOSE POPUP -->
+    <div id="losePopup" class="popup-overlay">
+        <div class="backdrop"></div>
+        <dotlottie-player id="loseAnim"
+            src="https://lottie.host/6805b1f1-4a71-4188-afcd-97ee47baf14e/CulZv8IPo8.lottie"
+            background="transparent" speed="1" style="width: 250px; height: 250px;" loop autoplay>
+        </dotlottie-player>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
