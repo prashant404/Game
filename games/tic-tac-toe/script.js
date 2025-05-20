@@ -16,23 +16,17 @@ let gameActive = true;
 let vsAI = false;
 
 const winPatterns = [
-    [0, 1, 2],
-    [3, 4, 5],
-    [6, 7, 8],
-    [0, 3, 6],
-    [1, 4, 7],
-    [2, 5, 8],
-    [0, 4, 8],
-    [2, 4, 6],
+    [0, 1, 2], [3, 4, 5], [6, 7, 8], // Rows
+    [0, 3, 6], [1, 4, 7], [2, 5, 8], // Columns
+    [0, 4, 8], [2, 4, 6] // Diagonals
 ];
 
 function createBoard() {
     board.innerHTML = "";
     for (let i = 0; i < 9; i++) {
         const cell = document.createElement("div");
-        cell.classList.add("cell", "border", "d-flex", "align-items-center", "justify-content-center", "fs-1");
+        cell.classList.add("cell", "border", "d-flex", "align-items-center", "justify-content-center");
         cell.dataset.index = i;
-        cell.style.height = "100px";
         board.appendChild(cell);
     }
     cells = document.querySelectorAll(".cell");
@@ -49,6 +43,12 @@ function handleClick(e) {
     if (!gameActive || cell.textContent !== "") return;
 
     cell.textContent = currentPlayer;
+    cell.style.opacity = "0";
+    cell.style.transform = "scale(0.5)";
+    setTimeout(() => {
+        cell.style.opacity = "1";
+        cell.style.transform = "scale(1)";
+    }, 100);
 
     if (checkWinner(cells, currentPlayer)) {
         endGame(`Player ${currentPlayer} Wins!`);
@@ -60,20 +60,16 @@ function handleClick(e) {
         return;
     }
 
-    // Switch player
     currentPlayer = currentPlayer === "X" ? "O" : "X";
     updateStatus();
 
-    // AI move if enabled and it's AI's turn
     if (vsAI && currentPlayer === aiSymbol) {
-        setTimeout(aiMove, 500);
+        setTimeout(() => aiMove(), 500);
     }
 }
 
 function checkWinner(boardCells, player) {
-    return winPatterns.some(pattern => {
-        return pattern.every(index => boardCells[index].textContent === player);
-    });
+    return winPatterns.some(pattern => pattern.every(index => boardCells[index].textContent === player));
 }
 
 function isDraw(boardCells) {
@@ -87,26 +83,17 @@ function endGame(message) {
 }
 
 function aiMove() {
-    let bestScore = -Infinity;
-    let move = null;
-
-    // Create a simple board state array for minimax
     const boardState = [...cells].map(cell => cell.textContent);
-
-    for (let i = 0; i < boardState.length; i++) {
-        if (boardState[i] === "") {
-            boardState[i] = aiSymbol;
-            let score = minimax(boardState, 0, false);
-            boardState[i] = "";
-            if (score > bestScore) {
-                bestScore = score;
-                move = i;
-            }
-        }
-    }
+    let move = getBestMove(boardState);
 
     if (move !== null) {
         cells[move].textContent = aiSymbol;
+        cells[-move].style.opacity = "0";
+        cells[move].style.transform = "scale(0.5)";
+        setTimeout(() => {
+            cells[move].style.opacity = "1";
+            cells[move].style.transform = "scale(1)";
+        }, 100);
 
         if (checkWinner(cells, aiSymbol)) {
             endGame(`Player ${aiSymbol} Wins!`);
@@ -121,6 +108,24 @@ function aiMove() {
         currentPlayer = playerSymbol;
         updateStatus();
     }
+}
+
+function getBestMove(boardState) {
+    let bestScore = -Infinity;
+    let move = null;
+
+    for (let i = 0; i < boardState.length; i++) {
+        if (boardState[i] === "") {
+            boardState[i] = aiSymbol;
+            let score = minimax(boardState, 0, false);
+            boardState[i] = "";
+            if (score > bestScore) {
+                bestScore = score;
+                move = i;
+            }
+        }
+    }
+    return move;
 }
 
 function minimax(boardState, depth, isMaximizing) {
@@ -154,9 +159,7 @@ function minimax(boardState, depth, isMaximizing) {
 }
 
 function checkWinnerForBoard(boardState, player) {
-    return winPatterns.some(pattern => {
-        return pattern.every(index => boardState[index] === player);
-    });
+    return winPatterns.some(pattern => pattern.every(index => boardState[index] === player));
 }
 
 function resetGame() {
@@ -188,7 +191,6 @@ playAgainBtn.addEventListener("click", () => {
     resetGame();
 });
 
-// Initial setup
 window.addEventListener("DOMContentLoaded", () => {
     createBoard();
     chooseModal.show();
