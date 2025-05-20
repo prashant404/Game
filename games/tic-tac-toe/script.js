@@ -84,11 +84,11 @@ function endGame(message) {
 
 function aiMove() {
     const boardState = [...cells].map(cell => cell.textContent);
-    let move = getBestMove(boardState);
+    const move = getBestMove(boardState);
 
     if (move !== null) {
         cells[move].textContent = aiSymbol;
-        cells[-move].style.opacity = "0";
+        cells[move].style.opacity = "0";
         cells[move].style.transform = "scale(0.5)";
         setTimeout(() => {
             cells[move].style.opacity = "1";
@@ -111,8 +111,18 @@ function aiMove() {
 }
 
 function getBestMove(boardState) {
+    // Early game heuristic: Prefer center (4) or corners (0, 2, 6, 8) if board is mostly empty
+    const emptyCells = boardState.filter(cell => cell === "").length;
+    if (emptyCells >= 7) {
+        const preferredMoves = [4, 0, 2, 6, 8].filter(i => boardState[i] === "");
+        if (preferredMoves.length > 0) {
+            return preferredMoves[Math.floor(Math.random() * preferredMoves.length)];
+        }
+    }
+
+    // Minimax for optimal move
     let bestScore = -Infinity;
-    let move = null;
+    let bestMoves = [];
 
     for (let i = 0; i < boardState.length; i++) {
         if (boardState[i] === "") {
@@ -121,16 +131,19 @@ function getBestMove(boardState) {
             boardState[i] = "";
             if (score > bestScore) {
                 bestScore = score;
-                move = i;
+                bestMoves = [i];
+            } else if (score === bestScore) {
+                bestMoves.push(i);
             }
         }
     }
-    return move;
+    // Randomly select from equally optimal moves
+    return bestMoves.length > 0 ? bestMoves[Math.floor(Math.random() * bestMoves.length)] : null;
 }
 
 function minimax(boardState, depth, isMaximizing) {
-    if (checkWinnerForBoard(boardState, aiSymbol)) return 10 - depth;
-    if (checkWinnerForBoard(boardState, playerSymbol)) return depth - 10;
+    if (checkWinnerForBoard(boardState, aiSymbol)) return 20 - depth; // Increased weight for faster wins
+    if (checkWinnerForBoard(boardState, playerSymbol)) return depth - 20;
     if (boardState.every(cell => cell !== "")) return 0;
 
     if (isMaximizing) {
